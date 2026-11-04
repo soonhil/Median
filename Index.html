@@ -58,6 +58,7 @@ ctx.strokeStyle=v('--c3');ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(X(xv),Y(0
 document.getElementById('lx').textContent=xv;
 document.getElementById('info').textContent='y₁ = '+f1(xv).toFixed(2)+',  y₂ = '+f2(xv).toFixed(2);
 }
+  
 s.oninput=()=>{n.value=s.value;draw()};
 n.oninput=()=>{const t=Math.min(XMAX,Math.max(1,+n.value||1));s.value=t;draw()};
 addEventListener('resize',draw);draw();
