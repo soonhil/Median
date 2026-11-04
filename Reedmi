@@ -5,7 +5,6 @@ from statistics import NormalDist
 
 nd = NormalDist(0, 1)
 
-
 def f1(x):
     return 100 * nd.cdf(np.log(x / 273.5) / 1.37)
 
