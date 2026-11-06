@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Графики функций</title>
+<title>Перционтель дохода</title>
 <style>
 :root{--bg:#fff;--fg:#1a1a1a;--grid:#ddd;--c1:#d62728;--c2:#1f77b4;--c3:#2ca02c;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -21,18 +21,19 @@ input[type=number]{width:80px;font-size:16px;padding:4px;background:var(--bg);co
 </style>
 </head>
 <body>
+<h5>Сколько процентов людей по миру и по Ташкенту, зарабатывают меньше тебя?</h5>
 <canvas id="c"></canvas>
 <div class="leg">
-<div><i style="background:var(--c1)"></i>y=100·Φ(ln(x/273.5)/1.37)</div>
-<div><i style="background:var(--c2)"></i>y=100·Φ(ln(x/564.7)/1.13)</div>
-<div><i style="background:var(--c3)"></i>x = <span id="lx">850</span>, 0 ≤ y ≤ 100</div>
+<div><i style="background:var(--c1)"></i>Распределение дохода по Миру </div>
+<div><i style="background:var(--c2)"></i>Распределение дохода по Ташкенту</div>
+<div><i style="background:var(--c3)"></i> Указанный доход $/мес. - <span id="lx">850</span>$ </div>
 </div>
 <div class="row"><b>X</b>
-<input id="s" type="range" min="1" max="3000" step="1" value="850">
-<input id="n" type="number" min="1" max="3000" value="850"></div>
+<input id="s" type="range" min="0" max="2500" step="10" value="850">
+<input id="n" type="number" min="0" max="2500" value="850"></div>
 <div id="info"></div>
 <script>
-const XMAX=3000;
+const XMAX=2500;
 function erf(x){const s=x<0?-1:1;x=Math.abs(x);const t=1/(1+0.3275911*x);
 const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return s*y}
 const cdf=z=>0.5*(1+erf(z/Math.SQRT2));
@@ -56,7 +57,7 @@ const xv=+s.value;
 ctx.strokeStyle=v('--c3');ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(X(xv),Y(0));ctx.lineTo(X(xv),Y(100));ctx.stroke();
 [[f1,'--c1'],[f2,'--c2']].forEach(([f,c])=>{ctx.fillStyle=v(c);ctx.beginPath();ctx.arc(X(xv),Y(f(xv)),4.5,0,7);ctx.fill()});
 document.getElementById('lx').textContent=xv;
-document.getElementById('info').textContent='y₁ = '+f1(xv).toFixed(2)+',  y₂ = '+f2(xv).toFixed(2);
+document.getElementById('info').textContent='Перцинтель по миру = '+f1(xv).toFixed(2)+'%,  Перцинтель по Ташкенту = '+f2(xv).toFixed(2)+'%';
 }
 s.oninput=()=>{n.value=s.value;draw()};
 n.oninput=()=>{const t=Math.min(XMAX,Math.max(1,+n.value||1));s.value=t;draw()};
